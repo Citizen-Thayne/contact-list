@@ -3,9 +3,8 @@ version: '3.2'
 services: 
   api:
     build: api/
-    command: python3 manage.py runserver 0.0.0.0:8000
     volumes:
-      - ./api:/code
+      - ./api:/app
     ports:
       - "8000:8000"
     depends_on:
@@ -13,3 +12,8 @@ services:
   db:
     image: postgres
     restart: always
+    volumes: 
+      - contacts-db:/var/lib/postgresql/data
+
+volumes:
+  contacts-db:
