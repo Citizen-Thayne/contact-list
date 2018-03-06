@@ -9,6 +9,14 @@ services:
       - "8000:8000"
     depends_on:
       - db
+  web:
+    build: web/
+    volumes:
+      - ./web:/app
+    ports:
+      - "8001:80"
+    depends_on:
+      - api
   db:
     image: postgres
     restart: always
