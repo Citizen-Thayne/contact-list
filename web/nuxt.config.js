@@ -18,6 +18,17 @@ module.exports = {
     ]
   },
   plugins: ['~/plugins/vuetify.js'],
+  modules: [
+    '@nuxtjs/proxy',
+  ],
+  proxy: {
+    '/api': {
+      target: 'http://localhost:8000',
+      pathRewrite: {
+        'api/': '/'
+      }
+    }
+  },
   css: [
     '~/assets/style/app.styl'
   ],
