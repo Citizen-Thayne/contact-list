@@ -1,18 +1,26 @@
 <template>
-  <v-layout column justify-center align-center>
+  <v-layout justify-center align-center>
     <v-flex xs12 sm8 md6>
       <v-card>
-        <v-card-title class="headline">Contacts</v-card-title>
+        <v-toolbar>
+          <v-toolbar-side-icon></v-toolbar-side-icon>
+          <v-toolbar-title>Contacts</v-toolbar-title>
+        </v-toolbar>
         <v-card-text>
           <v-list>
-            <v-list-item>
-
-            </v-list-item>
+            <v-list-tile v-for='contact in contacts' :key='contact.id'>
+              <v-list-tile-avatar>
+               <v-icon>person</v-icon>
+              </v-list-tile-avatar>
+              <v-list-tile-content>
+                <v-list-tile-title>{{contact.firstName}} {{contact.lastName}}</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
           </v-list>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="primary" flat nuxt to="/inspire">Continue</v-btn>
+          <v-btn color="primary" flat nuxt to="/new">New</v-btn>
         </v-card-actions>
       </v-card>
     </v-flex>
@@ -29,7 +37,8 @@ export default {
         lastName: 'Smith',
         addresses: ['12345 Fake Rd Street, 77777, AL', '67890 Test Ave, 222222, AK'],
         emailAddressses: ['fake@test.com', 'test@fake.com'],
-        phoneNumbers: [1234567890, 10987654321]
+        phoneNumbers: [1234567890, 10987654321],
+        id: 1
       }
     ]
   })
