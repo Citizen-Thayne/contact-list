@@ -20,7 +20,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="primary" flat nuxt to="/new">New</v-btn>
+          <v-btn color="primary" flat nuxt to="/create">New</v-btn>
         </v-card-actions>
       </v-card>
     </v-flex>
