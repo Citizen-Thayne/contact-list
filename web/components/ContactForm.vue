@@ -135,7 +135,7 @@ export default {
     },
     valid: {
       type: Boolean,
-      required: true
+      default: false
     }
   },
   methods: {
