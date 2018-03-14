@@ -2,7 +2,7 @@ const config = require('config')
 
 const nodeExternals = require('webpack-node-externals')
 const resolve = dir => require('path').join(__dirname, dir)
-console.log(config)
+
 module.exports = {
   /*
   ** Headers of the page
@@ -34,12 +34,7 @@ module.exports = {
     '@nuxtjs/axios'
   ],
   proxy: {
-    '/api': {
-      target: 'http://localhost:8000/',
-      pathRewrite: {
-        '^/api/': '/'
-      }
-    }
+    '/api': config.get('api').proxy
   },
   /*
   ** Customize the progress bar color
