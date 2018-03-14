@@ -34,6 +34,15 @@
     <v-list>
       <v-divider></v-divider>
       <v-subheader>Email Addresses</v-subheader>
+      <v-list-tile v-if='errors && errors.emailAddresses'>
+        <v-alert type='error'
+                 outline
+                 v-for='error in errors.emailAddresses'
+                 :value='true'
+                 :key='error'>
+          {{error}}
+        </v-alert>
+      </v-list-tile>
       <v-list-tile v-for='(email, index) in emailAddresses'
                    :key='index'>
         <v-text-field :value='emailAddresses[index]'
@@ -51,6 +60,15 @@
     <v-list>
       <v-divider></v-divider>
       <v-subheader>Addresses</v-subheader>
+      <v-list-tile v-if='errors && errors.addresses'>
+        <v-alert type='error'
+                 outline
+                 v-for='error in errors.addresses'
+                 :value='true'
+                 :key='error'>
+          {{error}}
+        </v-alert>
+      </v-list-tile>
       <v-list-tile v-for='(address, index) in addresses'
                    :key='index'>
         <v-text-field :value='addresses[index]'
@@ -68,6 +86,15 @@
     <v-list>
       <v-divider></v-divider>
       <v-subheader>Phone Numbers</v-subheader>
+      <v-list-tile v-if='errors && errors.phoneNumbers'>
+        <v-alert type='error'
+                 outline
+                 v-for='error in errors.phoneNumbers'
+                 :value='true'
+                 :key='error'>
+          {{error}}
+        </v-alert>
+      </v-list-tile>
       <v-list-tile v-for='(phone, index) in phoneNumbers'
                    :key='index'>
         <v-text-field :value='phoneNumbers[index]'
@@ -88,10 +115,10 @@
 
 
 <script>
-import { VForm, VTextField, VMenu, VDivider, VSubheader, VDatePicker } from 'vuetify'
+import { VForm, VTextField, VMenu, VDivider, VSubheader, VDatePicker, VAlert } from 'vuetify'
 
 export default {
-  components: { VForm, VTextField, VMenu, VDivider, VSubheader, VDatePicker },
+  components: { VForm, VTextField, VMenu, VDivider, VSubheader, VDatePicker, VAlert },
   data () {
     return {
       dobMenu: false,
@@ -136,6 +163,10 @@ export default {
     valid: {
       type: Boolean,
       default: false
+    },
+    errors: {
+      type: Object,
+      defualt: () => { }
     }
   },
   methods: {

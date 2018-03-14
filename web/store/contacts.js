@@ -26,6 +26,9 @@ export const mutations = {
   removeContact ({ contacts }, id) {
     delete contacts[id]
   },
+  setContactErrors ({ contacts }, { id, errors }) {
+    Vue.set(contacts[id], 'errors', errors)
+  },
   setErrors: (state, errors) => (state.errors = errors)
 }
 
@@ -58,8 +61,10 @@ export const actions = {
   async updateContact ({ commit, state }, id) {
     try {
       await this.$axios.$patch(`/api/contacts/${id}/`, state.contacts[id])
+      commit('setContactErrors', { id, errors: {} })
     } catch (error) {
-      commit('setErrors', [{ type: 'request', error }])
+      const fieldErrors = error.response.data
+      commit('setContactErrors', { id, errors: fieldErrors })
     }
   },
   async createContact ({ commit, state }) {
@@ -68,7 +73,8 @@ export const actions = {
       const contact = await this.$axios.$post('/api/contacts/', data)
       return contact
     } catch (error) {
-      commit('setErrors', [{ type: 'request', error }])
+      const fieldErrors = error.response.data
+      commit('setContactErrors', { id: -1, errors: fieldErrors })
     }
   },
   async deleteContact ({ commit, state }, id) {
