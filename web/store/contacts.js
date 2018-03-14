@@ -52,6 +52,14 @@ export const actions = {
       // console.error(error)
     }
   },
+  async retrieveContact ({ commit }, id) {
+    try {
+      const contact = await this.$axios.$get(`/api/contacts/${id}/`)
+      commit('insertContact', contact)
+    } catch (error) {
+      commit('setErrors', [{ type: 'request', error }])
+    }
+  },
   async createContact ({ commit, state }) {
     const contact = state.contacts[-1]
     commit('setSaveState', SAVE_STATES.PENDING)

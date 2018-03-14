@@ -12,7 +12,8 @@
         <v-card-text>
           <v-list>
             <v-list-tile v-for='contact in contacts'
-                         :key='contact.id'>
+                         :key='contact.id'
+                         @click='() => viewContact(contact.id)'>
               <v-list-tile-avatar>
                 <v-icon>person</v-icon>
               </v-list-tile-avatar>
@@ -38,6 +39,12 @@
 import { mapState } from 'vuex'
 
 export default {
+  methods: {
+    viewContact (id) {
+
+    }
+  },
+
   computed: {
     ...mapState('contacts', ['contacts'])
   },
