@@ -13,4 +13,4 @@ class Contact(models.Model):
         models.EmailField()
     )
     addresses = ArrayField(models.CharField(max_length=100))
-    phone_numbers = ArrayField(models.IntegerField())
+    phone_numbers = ArrayField(models.BigIntegerField())

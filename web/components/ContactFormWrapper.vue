@@ -24,6 +24,9 @@ export default {
     ...mapMutations('contacts', ['updateContactProp']),
     updateContact ({ propName, value }) {
       const id = this.id
+      if (propName === 'phoneNumbers') {
+        value = value.map(p => parseInt(p))
+      }
       this.updateContactProp({ id, propName, value })
 
       // Temp bug fix. New props sometimes won't trigger reactive updates. Need to investigate further

@@ -62,7 +62,7 @@ export const actions = {
   },
   async updateContact ({ commit, state }, id) {
     try {
-      await this.$axios.$patch(`/api/contacts/${id}/`, state.contacts)
+      await this.$axios.$patch(`/api/contacts/${id}/`, state.contacts[id])
     } catch (error) {
       commit('setSaveState', SAVE_STATES.ERROR)
       commit('setErrors', [{ type: 'request', error }])
