@@ -6,7 +6,7 @@
             md6>
       <v-card>
         <v-toolbar>
-          <v-toolbar-side-icon @click='$router.push("/")'>
+          <v-toolbar-side-icon :to='`/${id}/`'>
             <v-icon>arrow_back</v-icon>
           </v-toolbar-side-icon>
           <v-toolbar-title>Edit Contact</v-toolbar-title>

@@ -4,7 +4,7 @@
     <v-flex xs12
             sm8
             md6>
-      <contact-detail-card v-bind='contact'></contact-detail-card>
+      <contact-detail-card v-bind='contact' back='/'></contact-detail-card>
     </v-flex>
   </v-layout>
 </template>

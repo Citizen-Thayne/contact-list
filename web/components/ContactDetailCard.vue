@@ -1,11 +1,11 @@
 <template>
   <v-card>
     <v-toolbar>
-      <v-toolbar-side-icon>
-        <v-icon>arrow_back</v-icon>
+      <v-toolbar-side-icon to='/'>
+        <v-icon >arrow_back</v-icon>
       </v-toolbar-side-icon>
       <v-spacer></v-spacer>
-      <v-btn icon>
+      <v-btn icon nuxt :to='`/edit/${$route.params.id}/`'>
         <v-icon>edit</v-icon>
       </v-btn>
     </v-toolbar>
@@ -15,31 +15,7 @@
                 align-center
                 justify-center>
         <v-icon size='150px'>account_circle</v-icon>
-      </v-layout>
-
-      <!-- <v-layout column
-                class="media">
-        <v-card-title>
-          <v-btn dark
-                 icon>
-            <v-icon>chevron_left</v-icon>
-          </v-btn>
-          <v-spacer></v-spacer>
-          <v-btn dark
-                 icon
-                 class="mr-3">
-            <v-icon>edit</v-icon>
-          </v-btn>
-          <v-btn dark
-                 icon>
-            <v-icon>more_vert</v-icon>
-          </v-btn>
-        </v-card-title>
-        <v-spacer></v-spacer>
-        <v-card-title class="white--text pl-5 pt-5">
-          <div class="display-1 pl-5 pt-5">Ali Conners</div>
-        </v-card-title>
-      </v-layout> -->
+      </v-layout>    
     </v-card-media>
     <v-card-text>
       <v-list>
