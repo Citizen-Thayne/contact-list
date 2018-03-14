@@ -37,11 +37,11 @@
 
 
 <script>
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   computed: {
-    ...mapState('contacts', ['contacts'])
+    ...mapGetters('contacts', ['contacts'])
   },
   async fetch ({ store }) {
     await store.dispatch('contacts/retrieveContacts')

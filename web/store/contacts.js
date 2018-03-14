@@ -1,16 +1,8 @@
 import Vue from 'vue'
 
-export const SAVE_STATES = {
-  INITIAL: 'INITIAL',
-  PENDING: 'PENDING',
-  COMPLETED: 'COMPLETED',
-  ERROR: 'ERROR'
-}
-
 export const state = () => ({
   contacts: {},
-  errors: [],
-  saveState: SAVE_STATES.INITIAL
+  errors: []
 })
 
 export const mutations = {
@@ -34,12 +26,16 @@ export const mutations = {
   removeContact ({ contacts }, id) {
     delete contacts[id]
   },
-  setErrors: (state, errors) => (state.errors = errors),
-  setSaveState: (state, saveState) => (state.saveState = saveState)
+  setErrors: (state, errors) => (state.errors = errors)
 }
 
 export const getters = {
-  getContact: ({ contacts }) => id => contacts[id]
+  getContact: ({ contacts }) => id => contacts[id],
+  contacts: ({ contacts }) => {
+    let c = { ...contacts }
+    delete c[-1]
+    return c
+  }
 }
 
 export const actions = {
@@ -49,7 +45,6 @@ export const actions = {
       contacts.forEach(c => commit('insertContact', c))
     } catch (error) {
       commit('setErrors', [{ type: 'request', error }])
-      // console.error(error)
     }
   },
   async retrieveContact ({ commit }, id) {
@@ -64,20 +59,20 @@ export const actions = {
     try {
       await this.$axios.$patch(`/api/contacts/${id}/`, state.contacts[id])
     } catch (error) {
-      commit('setSaveState', SAVE_STATES.ERROR)
       commit('setErrors', [{ type: 'request', error }])
     }
   },
   async createContact ({ commit, state }) {
-    const contact = state.contacts[-1]
-    commit('setSaveState', SAVE_STATES.PENDING)
+    const data = state.contacts[-1]
     try {
-      console.log(contact)
-      await this.$axios.$post('/api/contacts/', contact)
-      commit('setSaveState', SAVE_STATES.COMPLETED)
+      const contact = await this.$axios.$post('/api/contacts/', data)
+      return contact
     } catch (error) {
-      commit('setSaveState', SAVE_STATES.ERROR)
       commit('setErrors', [{ type: 'request', error }])
     }
+  },
+  async deleteContact ({ commit, state }, id) {
+    await this.$axios.$delete(`/api/contacts/${id}/`)
+    commit('removeContact', id)
   }
 }

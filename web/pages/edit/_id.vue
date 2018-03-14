@@ -16,6 +16,9 @@
                                 @submit="save"/>
         </v-card-text>
         <v-card-actions>
+          <v-btn icon @click='deleteHandler'>
+            <v-icon color='red'>delete</v-icon>
+          </v-btn>
           <v-spacer></v-spacer>
           <v-btn color="primary"
                  flat
@@ -32,10 +35,14 @@ import { mapActions, mapMutations } from 'vuex'
 export default {
   components: { ContactFormWrapper },
   methods: {
-    ...mapActions('contacts', ['updateContact']),
+    ...mapActions('contacts', ['updateContact', 'deleteContact']),
     ...mapMutations('contacts', ['initContact']),
     save () {
       this.updateContact(this.$route.params.id)
+    },
+    async deleteHandler () {
+      await this.deleteContact(this.id)
+      this.$router.push('/')
     }
   },
   computed: {

@@ -34,8 +34,9 @@ export default {
   methods: {
     ...mapActions('contacts', ['createContact']),
     ...mapMutations('contacts', ['initContact']),
-    save () {
-      this.createContact()
+    async save () {
+      const contact = await this.createContact()
+      this.$router.push(`/${contact.id}`)
     }
   },
   created () {
