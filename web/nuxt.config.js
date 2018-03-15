@@ -36,6 +36,9 @@ module.exports = {
   proxy: {
     '/api': config.get('api').proxy
   },
+  axios: {
+    proxy: true
+  },
   /*
   ** Customize the progress bar color
   */

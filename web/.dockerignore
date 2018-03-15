@@ -1,1 +1,3 @@
 config/local.*
+.nuxt/
+node_modules/
