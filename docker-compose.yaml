@@ -14,8 +14,6 @@ services:
       - "80:80"
     depends_on:
       - api
-    environment:
-      - NODE_ENV=production
   db:
     image: postgres
     restart: always
