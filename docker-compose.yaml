@@ -12,6 +12,7 @@ services:
     build: web/
     ports:
       - "80:80"
+      - "8001:80"
     depends_on:
       - api
   db:
